@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.MuiInputBase-formControl::before {
+	border-color: #e58339;
+}
+
+.MuiInputBase-formControl::after {
+	border-color: #e58339;
+}
