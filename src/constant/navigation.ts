@@ -8,6 +8,8 @@ import {
 import { CgProfile } from 'react-icons/cg';
 import { MdGroups } from 'react-icons/md';
 
+import { signOut } from 'next-auth/react';
+
 export const PAGES_URL = [
 	{
 		id: 1,
@@ -51,10 +53,7 @@ export const SETTINGS = [
 	{
 		id: 2,
 		name: 'logout',
-		onClick: () => {
-			localStorage.removeItem('token');
-			window.location.href = '/login';
-		},
+		onClick: () => signOut(),
 		Icon: AiOutlineLogout,
 	},
 ];
