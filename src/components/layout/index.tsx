@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import Head from 'next/head';
-import Link from 'next/link';
 
 type Props = {
 	children: ReactElement | ReactElement[] | string;

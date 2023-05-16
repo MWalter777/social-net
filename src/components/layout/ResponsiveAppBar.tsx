@@ -36,8 +36,6 @@ function ResponsiveAppBar() {
 		setAnchorElUser(null);
 	};
 
-	console.log({ pathname, PAGES_URL });
-
 	return (
 		<AppBar position='static' style={{ backgroundColor: '#e58339' }}>
 			<Container className='w-full'>
