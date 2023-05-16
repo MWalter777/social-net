@@ -17,3 +17,28 @@
 .hover-primary-menu:hover {
 	background-color: #e58339 !important;
 }
+
+.truncate-3 {
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 640px) {
+	.truncate-3 {
+		-webkit-line-clamp: 7;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.truncate-3 {
+		-webkit-line-clamp: 10;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.truncate-3 {
+		-webkit-line-clamp: 100;
+	}
+}
