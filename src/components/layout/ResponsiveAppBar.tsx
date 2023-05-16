@@ -139,7 +139,7 @@ function ResponsiveAppBar({ data }: Props) {
 								<MenuItem
 									key={setting.id}
 									onClick={handleCloseUserMenu}
-									className='hover:bg-primary hover:text-white flex gap-2'
+									className='hover-primary-menu hover:text-white flex gap-2'
 								>
 									<setting.Icon />
 									{setting.onClick && (

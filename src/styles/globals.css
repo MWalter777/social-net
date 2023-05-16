@@ -13,3 +13,7 @@
 .MuiFormControl-root > .Mui-focused {
 	color: #e58339;
 }
+
+.hover-primary-menu:hover {
+	background-color: #e58339 !important;
+}
