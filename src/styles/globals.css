@@ -37,12 +37,6 @@
 	}
 }
 
-@media screen and (min-width: 1280px) {
-	.truncate-3 {
-		-webkit-line-clamp: 100;
-	}
-}
-
 .carousel-root .slide > div {
 	height: 100%;
 	display: flex;
@@ -64,4 +58,8 @@
 
 .carousel-root .slide > div > p.legend {
 	background-color: #e58339aa;
+}
+
+.carousel .slide img {
+	max-height: 625px;
 }

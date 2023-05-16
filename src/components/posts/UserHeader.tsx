@@ -9,7 +9,12 @@ import {
 import React, { MouseEvent, useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { MdAddBox, MdMessage, MdReportProblem } from 'react-icons/md';
+import {
+	MdAddBox,
+	MdMessage,
+	MdRemoveRedEye,
+	MdReportProblem,
+} from 'react-icons/md';
 
 type Setting = {
 	id: number;
@@ -23,7 +28,15 @@ const UserHeader = () => {
 
 	const settings: Setting[] = [
 		{
-			id: 1,
+			id: 10,
+			name: 'Show post',
+			Icon: MdRemoveRedEye,
+			onClick: () => {
+				console.log('show post');
+			},
+		},
+		{
+			id: 20,
 			name: 'Add user',
 			Icon: MdAddBox,
 			onClick: () => {
@@ -31,7 +44,7 @@ const UserHeader = () => {
 			},
 		},
 		{
-			id: 2,
+			id: 30,
 			name: 'Message',
 			Icon: MdMessage,
 			onClick: () => {
@@ -39,7 +52,7 @@ const UserHeader = () => {
 			},
 		},
 		{
-			id: 3,
+			id: 40,
 			name: 'Report user',
 			Icon: MdReportProblem,
 			onClick: () => {
