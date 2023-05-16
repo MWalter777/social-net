@@ -9,9 +9,17 @@
 .MuiInputBase-formControl::after {
 	border-color: #e58339;
 }
-
+.MuiFormLabel-root {
+	color: #e58339 !important;
+}
+.MuiFormLabel-root,
 .MuiFormControl-root > .Mui-focused {
-	color: #e58339;
+	border-color: #e58339 !important;
+}
+
+.MuiFormControl-root::after,
+.css-v4u5dn-MuiInputBase-root-MuiInput-root:after {
+	border-color: #e58339 !important;
 }
 
 .hover-primary-menu:hover {

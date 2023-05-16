@@ -3,7 +3,7 @@ import UserHeader from './UserHeader';
 
 const Comments = () => {
 	return (
-		<div className='w-full p-2 bg-white text-sm text-justify'>
+		<div className='w-full md:w-10/12 lg:w-8/12 p-2 bg-white text-sm text-justify'>
 			<UserHeader noShowPost />
 			<div className='w-full text-justify p-1 my-4'>
 				<p className='text-gray-700'>
