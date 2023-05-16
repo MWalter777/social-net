@@ -56,8 +56,8 @@ const UserHeader = () => {
 		setAnchorElUser(null);
 	};
 	return (
-		<div className='flex justify-between items-center border border-red-400'>
-			<div className='flex gap-4 items-center border border-green-500'>
+		<div className='flex justify-between items-center'>
+			<div className='flex gap-4 items-center'>
 				<Avatar src={''} />
 				<div className='flex flex-col justify-between'>
 					<p className='font-bold'>username</p>

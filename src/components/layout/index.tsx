@@ -48,7 +48,7 @@ const Layout = ({
 				<nav className='flex flex-col'>
 					<ResponsiveAppBar data={data} />
 				</nav>
-				<main className='m-4'>{children}</main>
+				<main className='my-4 mx-1'>{children}</main>
 			</div>
 		</div>
 	);
