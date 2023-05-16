@@ -42,3 +42,26 @@
 		-webkit-line-clamp: 100;
 	}
 }
+
+.carousel-root .slide > div {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-root .carousel.carousel-slider .control-arrow {
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #e58339;
+	height: 50px;
+	top: calc(50% - 25px);
+}
+.carousel-root .carousel.carousel-slider .control-arrow::before {
+	border-right-color: #e58339;
+	border-left-color: #e58339;
+}
+
+.carousel-root .slide > div > p.legend {
+	background-color: #e58339aa;
+}
