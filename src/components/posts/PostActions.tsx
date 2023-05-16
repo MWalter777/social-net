@@ -1,15 +1,12 @@
 import { getShortNumber } from '@/utils/getNumbers';
 import { IconButton } from '@mui/material';
+import Link from 'next/link';
 import React from 'react';
 import { FaCommentAlt, FaHeart, FaShare } from 'react-icons/fa';
 
 const PostActions = () => {
 	const handleLike = () => {
 		console.log('like');
-	};
-
-	const handleComment = () => {
-		console.log('comment');
 	};
 
 	const handleShare = () => {
@@ -27,9 +24,9 @@ const PostActions = () => {
 				</label>
 			</div>
 			<div className='flex items-center gap-2'>
-				<IconButton sx={{ p: 0 }} id='comment' onClick={handleComment}>
+				<Link href={'/p/1'} id='comment'>
 					<FaCommentAlt className={`w-5 text-primary`} />
-				</IconButton>
+				</Link>
 				<label htmlFor='comment' className='text-xs'>
 					{getShortNumber(4_000_000)}
 				</label>

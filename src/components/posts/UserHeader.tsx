@@ -6,6 +6,7 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material';
+import Link from 'next/link';
 import React, { MouseEvent, useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -21,6 +22,7 @@ type Setting = {
 	name: string;
 	Icon: IconType;
 	onClick?: () => void;
+	link?: string;
 };
 
 type Props = {
@@ -35,9 +37,7 @@ const UserHeader = ({ noShowPost = false }: Props) => {
 			id: 10,
 			name: 'Show post',
 			Icon: MdRemoveRedEye,
-			onClick: () => {
-				console.log('show post');
-			},
+			link: '/p/1',
 		},
 		{
 			id: 20,
@@ -110,9 +110,16 @@ const UserHeader = ({ noShowPost = false }: Props) => {
 							className='hover-primary-menu hover:text-white flex gap-2'
 						>
 							<setting.Icon />
-							<Typography textAlign='center' onClick={setting.onClick}>
-								{setting.name}
-							</Typography>
+							{setting.onClick && (
+								<Typography textAlign='center' onClick={setting.onClick}>
+									{setting.name}
+								</Typography>
+							)}
+							{setting.link && (
+								<Link href={setting.link}>
+									<Typography textAlign='center'>{setting.name}</Typography>
+								</Link>
+							)}
 						</MenuItem>
 					))}
 				</Menu>
