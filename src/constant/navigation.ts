@@ -3,7 +3,9 @@ import {
 	AiOutlineHome,
 	AiOutlineMessage,
 	AiOutlineUserAdd,
+	AiOutlineLogout,
 } from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
 import { MdGroups } from 'react-icons/md';
 
 export const PAGES_URL = [
@@ -36,5 +38,23 @@ export const PAGES_URL = [
 		name: 'Users',
 		url: '/users',
 		Icon: AiOutlineUserAdd,
+	},
+];
+
+export const SETTINGS = [
+	{
+		id: 1,
+		name: 'Profile',
+		url: '/profile',
+		Icon: CgProfile,
+	},
+	{
+		id: 2,
+		name: 'logout',
+		onClick: () => {
+			localStorage.removeItem('token');
+			window.location.href = '/login';
+		},
+		Icon: AiOutlineLogout,
 	},
 ];

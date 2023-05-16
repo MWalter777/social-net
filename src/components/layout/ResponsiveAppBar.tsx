@@ -1,6 +1,6 @@
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { PAGES_URL } from '@/constant/navigation';
+import { PAGES_URL, SETTINGS } from '@/constant/navigation';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import { MouseEvent, useState } from 'react';
@@ -15,8 +15,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FullLogo from '../Images/FullLogo';
 import { useRouter } from 'next/router';
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -77,7 +75,7 @@ function ResponsiveAppBar() {
 							{PAGES_URL.map((page) => (
 								<div
 									key={page.id}
-									className={`flex items-center p-2 px-4 gap-2 hover:border-b cursor-pointer ${
+									className={`flex items-center p-2 px-4 gap-2 hover:bg-[#e58339] hover:text-white cursor-pointer ${
 										pathname === page.url ? 'bg-[#e58339] text-white' : ''
 									}`}
 								>
@@ -135,13 +133,21 @@ function ResponsiveAppBar() {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting) => (
+							{SETTINGS.map((setting) => (
 								<MenuItem
-									key={setting}
+									key={setting.id}
 									onClick={handleCloseUserMenu}
-									className='hover:bg-[#e58339] hover:text-white'
+									className='hover:bg-[#e58339] hover:text-white flex gap-2'
 								>
-									<Typography textAlign='center'>{setting}</Typography>
+									<setting.Icon />
+									{setting.onClick && (
+										<Typography textAlign='center' onClick={setting.onClick}>
+											{setting.name}
+										</Typography>
+									)}
+									{setting.url && (
+										<Link href={setting.url}>{setting.name}</Link>
+									)}
 								</MenuItem>
 							))}
 						</Menu>
