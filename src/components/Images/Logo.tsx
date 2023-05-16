@@ -3,15 +3,8 @@ type Props = {
 	className?: string;
 	fill?: `#${string}`;
 	fillText?: `#${string}`;
-	width?: number;
-	height?: number;
 };
-const Logo = ({
-	className = 'w-fit',
-	fill = '#e58339',
-	height = 100,
-	width = 100,
-}: Props) => {
+const Logo = ({ className = 'w-fit', fill = '#e58339' }: Props) => {
 	return (
 		<svg className={className} viewBox='60 60 60 60 60'>
 			<g
