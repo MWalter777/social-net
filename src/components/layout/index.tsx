@@ -1,17 +1,20 @@
 import React, { ReactElement } from 'react';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import Head from 'next/head';
+import { Session } from 'next-auth';
 
 type Props = {
 	children: ReactElement | ReactElement[] | string;
 	title?: string;
 	description?: string;
+	session?: Session;
 };
 
 const Layout = ({
 	children,
 	title = 'Social Net',
 	description = 'Social Net',
+	session,
 }: Props) => {
 	return (
 		<div>
@@ -22,7 +25,7 @@ const Layout = ({
 			</Head>
 			<div className='flex flex-col'>
 				<nav className='flex flex-col'>
-					<ResponsiveAppBar />
+					<ResponsiveAppBar session={session} />
 				</nav>
 				<main className='m-4'>{children}</main>
 			</div>

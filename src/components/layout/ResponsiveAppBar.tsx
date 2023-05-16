@@ -15,8 +15,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FullLogo from '../Images/FullLogo';
 import { useRouter } from 'next/router';
+import { Session } from 'next-auth';
 
-function ResponsiveAppBar() {
+type Props = {
+	session?: Session;
+};
+
+function ResponsiveAppBar({ session }: Props) {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 	const { pathname } = useRouter();
@@ -112,7 +117,7 @@ function ResponsiveAppBar() {
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title='Open settings'>
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								<Avatar alt='Profile' src='/static/images/avatar/2.jpg' />
+								<Avatar alt='Profile' src={session?.user?.image || ''} />
 							</IconButton>
 						</Tooltip>
 						<Menu
