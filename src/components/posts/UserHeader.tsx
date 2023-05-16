@@ -23,7 +23,11 @@ type Setting = {
 	onClick?: () => void;
 };
 
-const UserHeader = () => {
+type Props = {
+	noShowPost?: boolean;
+};
+
+const UserHeader = ({ noShowPost = false }: Props) => {
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
 	const settings: Setting[] = [
@@ -99,7 +103,7 @@ const UserHeader = () => {
 					open={Boolean(anchorElUser)}
 					onClose={handleCloseUserMenu}
 				>
-					{settings.map((setting) => (
+					{settings.slice(+noShowPost).map((setting) => (
 						<MenuItem
 							key={setting.id}
 							onClick={handleCloseUserMenu}
