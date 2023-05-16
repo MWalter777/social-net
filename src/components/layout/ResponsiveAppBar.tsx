@@ -75,8 +75,8 @@ function ResponsiveAppBar() {
 							{PAGES_URL.map((page) => (
 								<div
 									key={page.id}
-									className={`flex items-center p-2 px-4 gap-2 hover:bg-[#e58339] hover:text-white cursor-pointer ${
-										pathname === page.url ? 'bg-[#e58339] text-white' : ''
+									className={`flex items-center p-2 px-4 gap-2 hover:bg-primary hover:text-white cursor-pointer ${
+										pathname === page.url ? 'bg-primary text-white' : ''
 									}`}
 								>
 									<page.Icon />
@@ -137,7 +137,7 @@ function ResponsiveAppBar() {
 								<MenuItem
 									key={setting.id}
 									onClick={handleCloseUserMenu}
-									className='hover:bg-[#e58339] hover:text-white flex gap-2'
+									className='hover:bg-primary hover:text-white flex gap-2'
 								>
 									<setting.Icon />
 									{setting.onClick && (

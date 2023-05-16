@@ -17,7 +17,7 @@ type User = {
 	};
 };
 
-const Login = () => {
+const Register = () => {
 	const [user, setUser] = React.useState<User>({});
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { value, name } = e.target;
@@ -45,15 +45,6 @@ const Login = () => {
 			}));
 
 		console.log({ user });
-	};
-	const loginWithGoogle = () => {
-		console.log('login with google');
-	};
-	const loginWithGithub = () => {
-		console.log('login with github');
-	};
-	const loginWithMicrosoft = () => {
-		console.log('login with microsoft');
 	};
 	return (
 		<div className='w-full h-screen flex items-center justify-center'>
@@ -86,26 +77,17 @@ const Login = () => {
 						type='submit'
 						className='uppercase text-white bg-primary w-10/12 hover:bg-primary'
 					>
-						Login
+						Register
 					</Button>
 					<div className='flex justify-center gap-4'>
-						<BsGoogle
-							className='text-primary text-4xl'
-							onClick={loginWithGoogle}
-						/>
-						<BsGithub
-							className='text-primary text-4xl'
-							onClick={loginWithGithub}
-						/>
-						<BsMicrosoft
-							className='text-primary text-4xl'
-							onClick={loginWithMicrosoft}
-						/>
+						<BsGoogle className='text-primary text-4xl' />
+						<BsGithub className='text-primary text-4xl' />
+						<BsMicrosoft className='text-primary text-4xl' />
 					</div>
 					<div className='flex items-center'>
-						<p className='text-primary text-sm'>Don't have an account?</p>
-						<Link href='/register' className='text-primary'>
-							Register
+						<p className='text-primary text-sm'>Already have an account?</p>
+						<Link href='/login' className='text-primary'>
+							Login
 						</Link>
 					</div>
 				</form>
@@ -114,4 +96,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Register;

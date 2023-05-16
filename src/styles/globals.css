@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 .MuiInputBase-formControl::before {
-	border-color: #e58339;
+	border-color: #e58339 !important;
 }
 
 .MuiInputBase-formControl::after {
 	border-color: #e58339;
+}
+
+.MuiFormControl-root > .Mui-focused {
+	color: #e58339;
 }
