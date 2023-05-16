@@ -44,12 +44,14 @@ export const PAGES_URL = [
 ];
 
 export const SETTINGS = [
-	{
+	/**
+  	{
 		id: 1,
 		name: 'Profile',
 		url: '/profile',
 		Icon: CgProfile,
 	},
+ */
 	{
 		id: 2,
 		name: 'logout',

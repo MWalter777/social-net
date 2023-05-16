@@ -147,9 +147,11 @@ function ResponsiveAppBar({ data }: Props) {
 											{setting.name}
 										</Typography>
 									)}
-									{setting.url && (
+									{/**
+									 {setting.url && (
 										<Link href={setting.url}>{setting.name}</Link>
 									)}
+										 */}
 								</MenuItem>
 							))}
 						</Menu>
