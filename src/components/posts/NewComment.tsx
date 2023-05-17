@@ -7,20 +7,24 @@ type NewCommentT = {
 	comment: string;
 };
 
-const NewComment = () => {
+type Props = {
+	userId: string;
+};
+
+const NewComment = ({ userId }: Props) => {
 	const [comment, setComment] = useState<NewCommentT>({
-		userId: '',
+		userId: userId,
 		comment: '',
 	});
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		console.log(comment);
-		setComment({ ...comment, comment: '' });
+		setComment({ ...comment, userId, comment: '' });
 	};
 
 	const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setComment({ ...comment, [e.target.name]: e.target.value });
+		setComment({ ...comment, userId, [e.target.name]: e.target.value });
 	};
 
 	return (
