@@ -26,10 +26,22 @@ type Setting = {
 };
 
 type Props = {
+	id: string;
+	name: string;
+	avatar: string;
+	postId: string;
+	username: string;
 	noShowPost?: boolean;
 };
 
-const UserHeader = ({ noShowPost = false }: Props) => {
+const UserHeader = ({
+	noShowPost = false,
+	avatar,
+	id,
+	name,
+	username,
+	postId,
+}: Props) => {
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
 	const settings: Setting[] = [
@@ -37,14 +49,14 @@ const UserHeader = ({ noShowPost = false }: Props) => {
 			id: 10,
 			name: 'Show post',
 			Icon: MdRemoveRedEye,
-			link: '/p/1',
+			link: `/p/${postId}`,
 		},
 		{
 			id: 20,
 			name: 'Add user',
 			Icon: MdAddBox,
 			onClick: () => {
-				console.log('MdAddBox');
+				console.log('MdAddBox', id);
 			},
 		},
 		{
@@ -52,7 +64,7 @@ const UserHeader = ({ noShowPost = false }: Props) => {
 			name: 'Message',
 			Icon: MdMessage,
 			onClick: () => {
-				console.log('MdMessage');
+				console.log('MdMessage', id);
 			},
 		},
 		{
@@ -60,7 +72,7 @@ const UserHeader = ({ noShowPost = false }: Props) => {
 			name: 'Report user',
 			Icon: MdReportProblem,
 			onClick: () => {
-				console.log('report user');
+				console.log('report user', id);
 			},
 		},
 	];
@@ -75,10 +87,10 @@ const UserHeader = ({ noShowPost = false }: Props) => {
 	return (
 		<div className='flex justify-between items-center'>
 			<div className='flex gap-4 items-center'>
-				<Avatar src={''} />
+				<Avatar src={avatar} />
 				<div className='flex flex-col justify-between'>
-					<p className='font-bold'>username</p>
-					<p className='text-xs'>@username</p>
+					<p className='font-bold'>{name}</p>
+					<p className='text-xs'>{username}</p>
 				</div>
 			</div>
 			<div>

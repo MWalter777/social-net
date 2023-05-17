@@ -4,13 +4,17 @@ import Link from 'next/link';
 import React from 'react';
 import { FaCommentAlt, FaHeart, FaShare } from 'react-icons/fa';
 
-const PostActions = () => {
+type Props = {
+	postId: string;
+};
+
+const PostActions = ({ postId }: Props) => {
 	const handleLike = () => {
-		console.log('like');
+		console.log('like', postId);
 	};
 
 	const handleShare = () => {
-		console.log('share');
+		console.log('share', postId);
 	};
 
 	return (

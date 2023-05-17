@@ -3,28 +3,31 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import LogoFull from '@/assets/logo-full.png';
 import Logo from '@/assets/logo.png';
+import { IPost } from '@/interface/IPost';
 
-const PostContent = () => {
+type Props = {
+	noShowPost?: boolean;
+	post: IPost;
+};
+
+const PostContent = ({ noShowPost = false, post }: Props) => {
 	return (
 		<div className='text-gray-700'>
-			<p className='text-justify px-1 text-sm md:text-base truncate-3'>
-				Elit ipsum id elit cupidatat elit sunt adipisicing nisi esse commodo.
-				Deserunt esse magna eu nisi reprehenderit mollit reprehenderit eu magna
+			<p
+				className={`text-justify px-1 text-sm md:text-base ${
+					!noShowPost && 'truncate-3'
+				}`}
+			>
+				{post.body}
 			</p>
 			<div>
 				<Carousel>
-					<div>
-						<Image src={Logo} alt='logo' />
-						<p className='legend'>Legend 1</p>
-					</div>
-					<div>
-						<Image src={LogoFull} alt='logo' />
-						<p className='legend'>Legend 2</p>
-					</div>
-					<div>
-						<Image src={Logo} alt='logo' />
-						<p className='legend'>Legend 3</p>
-					</div>
+					{post.images.map((image) => (
+						<div key={image.id}>
+							<Image src={image.url} alt='logo' />
+							<p className='legend'>{image.title}</p>
+						</div>
+					))}
 				</Carousel>
 			</div>
 		</div>
