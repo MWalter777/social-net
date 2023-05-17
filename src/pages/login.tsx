@@ -8,17 +8,17 @@ import { getSession } from 'next-auth/react';
 const Login = () => {
 	const loginWithGoogle = () => {
 		signIn('google', {
-			callbackUrl: process.env.NEXT_PUBLIC_URL || 'http://localhost:3000/',
+			callbackUrl: `${process.env.NEXT_PUBLIC_URL}validate-account`,
 		});
 	};
 	const loginWithGithub = () => {
 		signIn('github', {
-			callbackUrl: process.env.NEXT_PUBLIC_URL || 'http://localhost:3000/',
+			callbackUrl: `${process.env.NEXT_PUBLIC_URL}validate-account`,
 		});
 	};
 	const loginWithGitlab = () => {
 		signIn('gitlab', {
-			callbackUrl: process.env.NEXT_PUBLIC_URL || 'http://localhost:3000/',
+			callbackUrl: `${process.env.NEXT_PUBLIC_URL}validate-account`,
 		});
 	};
 	return (
