@@ -5,8 +5,24 @@ import { FaTrashAlt } from 'react-icons/fa';
 import TextField from '@/components/Input/TextField';
 import { Button, TextareaAutosize } from '@mui/material';
 import { MdOutlineTitle } from 'react-icons/md';
+import { imageToBase64 } from '@/utils/simpleImageHandle';
 
 const fileTypes = ['JPEG', 'PNG', 'GIF'];
+
+const sendFiles = async (files: File[]) => {
+	const images = await Promise.all(files.map(imageToBase64));
+	const data = await (
+		await fetch('/api/cloudinary', {
+			method: 'POST',
+			body: JSON.stringify({ images }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+	).json();
+	console.log(data);
+	return data;
+};
 
 const CreatePost = () => {
 	const [files, setFiles] = useState<File[]>([]);
@@ -15,7 +31,7 @@ const CreatePost = () => {
 	};
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(files);
+		sendFiles(files);
 	};
 	const removeFile = (name: string) => {
 		const newFiles = files.filter((file) => file.name !== name);

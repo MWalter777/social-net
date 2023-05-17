@@ -13,7 +13,7 @@ export default function Home() {
 				))}
 			</div>
 			<Link href='/create-post' className='fixed bottom-8 right-8'>
-				<BsPlus className='bg-primary rounded-full shadow-xl text-white fixed bottom-8 right-8 cursor-pointer hover:scale-105 w-10 h-10' />
+				<BsPlus className='bg-primary rounded-full shadow-xl text-white fixed bottom-8 right-8 cursor-pointer hover:scale-105 w-10 h-10 md:w-16 md:h-16' />
 			</Link>
 		</Layout>
 	);
