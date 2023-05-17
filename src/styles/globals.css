@@ -71,3 +71,43 @@
 .carousel .slide img {
 	max-height: 625px;
 }
+
+.drag-and-drop-files > label {
+	border-color: #e58339;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	height: auto;
+	width: 100%;
+	min-width: unset;
+	margin: auto;
+}
+
+.drag-and-drop-files > label > div {
+	display: flex;
+	flex-wrap: wrap;
+	height: auto;
+}
+
+.drag-and-drop-files > label > input {
+	display: flex;
+	width: 200px;
+	flex-wrap: wrap;
+}
+
+.drag-and-drop-files > label > svg path {
+	fill: #e58339;
+}
+
+button.custom-btn {
+	background-color: #e58339;
+	color: #fff;
+	min-width: 100px;
+}
+
+button.custom-btn:hover {
+	background-color: #f3822b;
+	transform: scale(1.01);
+}
