@@ -29,8 +29,6 @@ export const getServerSideProps = async (context: RequestContext) => {
 				destination: '/login?error=cannotValidateAccount',
 			},
 		};
-	const { email, name } = session.user;
-	console.log({ email, name });
 	return {
 		redirect: {
 			destination: '/',

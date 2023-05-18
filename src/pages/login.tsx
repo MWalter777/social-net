@@ -1,9 +1,8 @@
 import React from 'react';
 import FullLogo from '@/components/Images/FullLogo';
 import { BsGit, BsGoogle, BsGithub } from 'react-icons/bs';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { RequestContext } from 'next/dist/server/base-server';
-import { getSession } from 'next-auth/react';
 
 const Login = () => {
 	const loginWithGoogle = () => {
