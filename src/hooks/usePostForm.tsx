@@ -18,11 +18,13 @@ const sendFiles = async (files: File[]) => {
 	).json();
 	return data.images;
 };
-
+type PostToSend = Omit<IPost, 'id' | 'user' | 'images'> & {
+	images: Omit<IImage, 'id'>[];
+};
 export const usePostForm = () => {
 	const [files, setFiles] = useState<File[]>([]);
 	const [uploading, setUploading] = useState(false);
-	const { postFn } = usePost<IPost, IPost>('api/post/save');
+	const { postFn } = usePost<PostToSend, IPost>('api/post/save');
 	const [data, setData] = useState({
 		title: {
 			value: '',
@@ -56,7 +58,7 @@ export const usePostForm = () => {
 		setUploading(true);
 		try {
 			const images = await sendFiles(files);
-			const imagesToSend: IImage[] = images.map((image) => ({
+			const imagesToSend: Omit<IImage, 'id'>[] = images.map((image) => ({
 				url: image.url,
 				publicId: image.public_id,
 				assetId: image.asset_id,

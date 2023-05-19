@@ -1,15 +1,15 @@
 import { IUser } from './IUser';
 
 export interface IPost {
-	id?: string;
-	user?: IUser;
+	id: string;
+	user: IUser;
 	title: string;
 	body: string;
 	images: IImage[];
 }
 
 export interface IImage {
-	id?: string;
+	id: string;
 	assetId: string;
 	publicId: string;
 	url: string;

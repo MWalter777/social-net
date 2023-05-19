@@ -2,7 +2,7 @@ import { BASE_BACKEND_URL } from '@/constant/urls';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-const usePost = <T, R>(url = '') => {
+const useGetData = <T, B>(url = '') => {
 	const [accessToken, setAccessToken] = useState('');
 
 	useEffect(() => {
@@ -11,20 +11,20 @@ const usePost = <T, R>(url = '') => {
 			setAccessToken(accessToken);
 		}
 	}, []);
-	const postFn = async (body: T) => {
+
+	const getData = async (body: B) => {
 		const res = await fetch(`${BASE_BACKEND_URL}${url}`, {
-			method: 'POST',
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${accessToken}`,
 			},
-			body: JSON.stringify(body),
 		});
-		const { data }: { data: R } = await res.json();
+		const { data }: { data: T } = await res.json();
 		return data;
 	};
 
-	return { postFn };
+	return { getData };
 };
 
-export default usePost;
+export default useGetData;

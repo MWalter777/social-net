@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import LogoFull from '@/assets/logo-full.png';
 import Logo from '@/assets/logo.png';
 import { IPost } from '@/interface/IPost';
+import { validateImageUrl } from '@/utils/validateImage';
 
 type Props = {
 	noShowPost?: boolean;
@@ -22,12 +23,13 @@ const PostContent = ({ noShowPost = false, post }: Props) => {
 			</p>
 			<div>
 				<Carousel>
-					{post.images.map((image) => (
-						<div key={image.id}>
-							<Image src={image.url} alt='logo' />
-							<p className='legend'>{image.title}</p>
-						</div>
-					))}
+					{post.images
+						.filter((img) => validateImageUrl(img.url))
+						.map((image) => (
+							<div key={image.id}>
+								<Image src={image.url} width={100} height={100} alt='logo' />
+							</div>
+						))}
 				</Carousel>
 			</div>
 		</div>
