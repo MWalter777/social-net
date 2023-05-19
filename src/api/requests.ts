@@ -1,14 +1,36 @@
-const API_KEY = process.env.NEXT_PUBLIC_PEXEL_API || '';
+import { IResponseValidation } from '@/interface/IResponseValidation';
 
-export const getCuratedPhotos = async () => {
+type Props = {
+	provider: string;
+	id: string;
+	email: string;
+	name: string;
+	token: string;
+};
+export const getAccessToken = async ({
+	email,
+	id,
+	name,
+	provider,
+	token,
+}: Props) => {
 	const res = await fetch(
-		`https://api.pexels.com/v1/curated?page=11&per_page=18`,
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}validate-token`,
 		{
+			method: 'POST',
 			headers: {
-				Authorization: API_KEY,
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
 			},
+			body: JSON.stringify({
+				provider,
+				id,
+				email,
+				name,
+				token,
+			}),
 		}
 	);
-	const responseJson = await res.json();
-	return responseJson.photos;
+	const data: IResponseValidation = await res.json();
+	return data;
 };

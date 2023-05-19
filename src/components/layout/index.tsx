@@ -20,7 +20,9 @@ const Layout = ({
 }: Props) => {
 	const { data, status } = useSession();
 	const router = useRouter();
-	if (status === 'unauthenticated') router.push('/login');
+	useEffect(() => {
+		if (status === 'unauthenticated') router.push('/login');
+	}, [status]);
 	if (status === 'loading' || status === 'unauthenticated') {
 		const randomSpinner: SpinnerT[] = [
 			'default',

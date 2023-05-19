@@ -3,6 +3,8 @@ import FullLogo from '@/components/Images/FullLogo';
 import { BsGit, BsGoogle, BsGithub } from 'react-icons/bs';
 import { getSession, signIn } from 'next-auth/react';
 import { RequestContext } from 'next/dist/server/base-server';
+import { getToken } from 'next-auth/jwt';
+import { SECRET_TOKEN } from '@/constant/token';
 
 const Login = () => {
 	const loginWithGoogle = () => {
@@ -50,6 +52,12 @@ const Login = () => {
 
 export const getServerSideProps = async (context: RequestContext) => {
 	const session = await getSession(context);
+	const token = await getToken({
+		req: context.req as any,
+		raw: true,
+		secret: SECRET_TOKEN,
+	});
+
 	if (!session)
 		return {
 			props: {},

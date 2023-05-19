@@ -2,9 +2,18 @@ import NextAuth, { AuthOptions } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import GitlabProvider from 'next-auth/providers/gitlab';
-import { IResponseValidation } from '@/interface/IResponseValidation';
+import { getAccessToken } from '@/api/requests';
+import { SECRET_TOKEN } from '@/constant/token';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export const authOptions: AuthOptions = {
+	secret: SECRET_TOKEN,
+	session: {
+		strategy: 'jwt',
+	},
+	jwt: {
+		secret: SECRET_TOKEN,
+	},
 	providers: [
 		GithubProvider({
 			clientId: process.env.GITHUB_ID || '',
@@ -19,41 +28,42 @@ export const authOptions: AuthOptions = {
 			clientSecret: process.env.GITLAB_SECRET || '',
 		}),
 	],
-	callbacks: {
-		async signIn({ user, account }) {
-			if (!user || !user.email || !user.id || !user.email) return false;
-			if (account && account.provider === 'github') {
-				try {
-					const res = await fetch(
-						`${process.env.NEXT_PUBLIC_BACKEND_URL}validate-token`,
-						{
-							method: 'POST',
-							headers: {
-								Authorization: `Bearer ${account.access_token}`,
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify({
-								provider: account.provider,
-								id: user.id,
-								email: user.email,
-								name: user.name,
-								token: account.access_token,
-							}),
-						}
-					);
-					const data: IResponseValidation = await res.json();
-					if (data.accessToken) {
-						account.access_token = data.accessToken;
-						console.log('signIn', account);
-						return true;
-					}
-				} catch (err) {
-					console.log(err);
-				}
-			}
-			return false;
-		},
-	},
 };
 
-export default NextAuth(authOptions);
+export default (req: NextApiRequest, res: NextApiResponse) => {
+	const addCookie = (accessToken: string) => {
+		res.setHeader('Set-Cookie', `accessToken=${accessToken}; Path=/;`);
+	};
+	const signInCallback = async ({
+		user,
+		account,
+	}: {
+		user: any;
+		account: any;
+	}) => {
+		if (!user || !user.email || !user.id || !user.email) return false;
+		if (account && account.provider === 'github') {
+			try {
+				const data = await getAccessToken({
+					provider: account.provider,
+					id: user.id,
+					email: user.email,
+					name: user.name || '',
+					token: account.access_token || '',
+				});
+				if (data.accessToken) {
+					Object.assign(user, { accessToken: data.accessToken });
+					addCookie(data.accessToken);
+					return true;
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		}
+		return false;
+	};
+	return NextAuth(req, res, {
+		...authOptions,
+		callbacks: { signIn: signInCallback },
+	});
+};
