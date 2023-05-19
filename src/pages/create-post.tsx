@@ -1,84 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Layout from '@/components/layout';
 import { FileUploader } from 'react-drag-drop-files';
 import { FaTrashAlt } from 'react-icons/fa';
 import TextField from '@/components/Input/TextField';
 import { Button, TextareaAutosize } from '@mui/material';
 import { MdOutlineTitle } from 'react-icons/md';
-import { imageToBase64 } from '@/utils/simpleImageHandle';
-import { IPostImages } from '@/interface/IPostImages';
+import { usePostForm } from '@/hooks/usePostForm';
 
 const fileTypes = ['JPEG', 'PNG', 'GIF'];
 
-const sendFiles = async (files: File[]) => {
-	if (!files.length) return [];
-	const images = await Promise.all(files.map(imageToBase64));
-	const data: IPostImages = await (
-		await fetch('/api/cloudinary', {
-			method: 'POST',
-			body: JSON.stringify({ images }),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		})
-	).json();
-	return data.images;
-};
-
 const CreatePost = () => {
-	const [files, setFiles] = useState<File[]>([]);
-	const [uploading, setUploading] = useState(false);
-	const [data, setData] = useState({
-		title: {
-			value: '',
-			error: '',
-		},
-		body: {
-			value: '',
-			error: '',
-		},
-		error: '',
-	});
-	const handleChange = (files: FileList) => {
-		setFiles(Array.from(files));
-	};
-	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		if (!data.title.value) {
-			setData({
-				...data,
-				title: { ...data.title, error: 'Title is required' },
-			});
-			return;
-		}
-		if (!data.body.value) {
-			setData({
-				...data,
-				body: { ...data.body, error: 'Body is required' },
-			});
-			return;
-		}
-		setUploading(true);
-		try {
-			const images = await sendFiles(files);
-			const imagesUrl = images.map((image) => image.secure_url);
-		} catch (err) {
-			console.log(err);
-		} finally {
-			setUploading(false);
-		}
-	};
-	const removeFile = (name: string) => {
-		const newFiles = files.filter((file) => file.name !== name);
-		setFiles(newFiles);
-	};
-	const handleInputChange = (e: {
-		target: { name: string; value: string };
-	}) => {
-		const { name, value } = e.target;
-		setData({ ...data, [name]: { value, error: '' }, error: '' });
-	};
-
+	const {
+		data,
+		files,
+		handleChange,
+		handleInputChange,
+		onSubmit,
+		removeFile,
+		uploading,
+	} = usePostForm();
 	return (
 		<Layout>
 			<div className='w-full flex flex-col gap-1 items-center justify-center'>
