@@ -35,7 +35,6 @@ export const usePostForm = () => {
 		error: '',
 	});
 	const handleChange = (files: FileList) => {
-		console.log(Array.from(files));
 		setFiles(Array.from(files));
 	};
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
