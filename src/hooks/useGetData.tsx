@@ -12,7 +12,7 @@ const useGetData = <T, B>(url = '') => {
 		}
 	}, []);
 
-	const getData = async (body: B) => {
+	const getData = async () => {
 		const res = await fetch(`${BASE_BACKEND_URL}${url}`, {
 			method: 'GET',
 			headers: {
