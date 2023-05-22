@@ -32,6 +32,7 @@ type Props = {
 	postId: string;
 	username: string;
 	noShowPost?: boolean;
+	className?: string;
 };
 
 const UserHeader = ({
@@ -41,6 +42,7 @@ const UserHeader = ({
 	name,
 	username,
 	postId,
+	className = '',
 }: Props) => {
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -85,7 +87,7 @@ const UserHeader = ({
 		setAnchorElUser(null);
 	};
 	return (
-		<div className='flex justify-between items-center'>
+		<div className={`flex justify-between items-center ${className}`}>
 			<div className='flex gap-4 items-center'>
 				<Avatar src={avatar} />
 				<div className='flex flex-col justify-between'>
