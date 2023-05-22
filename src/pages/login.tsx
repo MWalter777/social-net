@@ -31,16 +31,16 @@ const Login = () => {
 				<div className='flex flex-col gap-6 my-4 items-center'>
 					<div className='flex justify-center gap-4'>
 						<BsGoogle
-							className='text-primary text-4xl cursor-pointer'
-							onClick={loginWithGoogle}
+							className='text-primary opacity-25 text-4xl'
+							onClick={() => {}}
 						/>
 						<BsGithub
 							className='text-primary text-4xl cursor-pointer'
 							onClick={loginWithGithub}
 						/>
 						<BsGit
-							className='text-primary text-4xl cursor-pointer'
-							onClick={loginWithGitlab}
+							className='text-primary opacity-25 text-4xl'
+							onClick={() => {}}
 						/>
 					</div>
 				</div>
