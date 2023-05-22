@@ -53,6 +53,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 				});
 				if (data.accessToken) {
 					Object.assign(user, { accessToken: data.accessToken });
+					console.log('adding cookie');
 					addCookie(data.accessToken);
 					return true;
 				}
