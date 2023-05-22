@@ -21,17 +21,19 @@ const PostContent = ({ noShowPost = false, post }: Props) => {
 			>
 				{post.body}
 			</pre>
-			<div>
-				<Carousel>
-					{post.images
-						.filter((img) => validateImageUrl(img.url))
-						.map((image) => (
-							<div key={image.id}>
-								<Image src={image.url} width={100} height={100} alt='logo' />
-							</div>
-						))}
-				</Carousel>
-			</div>
+			{post.images.length > 0 && (
+				<div>
+					<Carousel showThumbs={false}>
+						{post.images
+							.filter((img) => validateImageUrl(img.url))
+							.map((image) => (
+								<div key={image.id}>
+									<Image src={image.url} width={100} height={100} alt='logo' />
+								</div>
+							))}
+					</Carousel>
+				</div>
+			)}
 		</div>
 	);
 };
