@@ -5,6 +5,7 @@ import GitlabProvider from 'next-auth/providers/gitlab';
 import { getAccessToken } from '@/api/requests';
 import { SECRET_TOKEN } from '@/constant/token';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { IResponseValidation } from '@/interface/IResponseValidation';
 
 export const authOptions: AuthOptions = {
 	secret: SECRET_TOKEN,
@@ -31,8 +32,11 @@ export const authOptions: AuthOptions = {
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-	const addCookie = (accessToken: string) => {
-		res.setHeader('Set-Cookie', `accessToken=${accessToken}; Path=/;`);
+	const addCookie = (data: IResponseValidation) => {
+		res.setHeader(
+			'Set-Cookie',
+			`accessToken=${data.accessToken}; myId=${data.user.id};  Path=/;`
+		);
 	};
 	const signInCallback = async ({
 		user,
@@ -54,7 +58,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 				if (data.accessToken) {
 					Object.assign(user, { accessToken: data.accessToken });
 					console.log('adding cookie');
-					addCookie(data.accessToken);
+					addCookie(data);
 					return true;
 				}
 			} catch (err) {

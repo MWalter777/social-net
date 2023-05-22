@@ -6,6 +6,7 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import React, { MouseEvent, useState } from 'react';
 import { IconType } from 'react-icons';
@@ -58,7 +59,8 @@ const UserHeader = ({
 			name: 'Add user',
 			Icon: MdAddBox,
 			onClick: () => {
-				console.log('MdAddBox', id);
+				const myId = Cookies.get('myId');
+				console.log({ myId, id });
 			},
 		},
 		{
