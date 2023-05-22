@@ -23,6 +23,9 @@ type PostToSend = Omit<IPost, 'id' | 'user' | 'images'> & {
 };
 export const usePostForm = () => {
 	const [files, setFiles] = useState<File[]>([]);
+	const [errors, setErrors] = useState<{ message: string; field: string }[]>(
+		[]
+	);
 	const [uploading, setUploading] = useState(false);
 	const { postFn } = usePost<PostToSend, IPost>('api/post/save');
 	const [data, setData] = useState({
@@ -41,17 +44,29 @@ export const usePostForm = () => {
 	};
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (!data.title.value) {
+		if (!data.title.value || data.title.value.length > 250) {
 			setData({
 				...data,
-				title: { ...data.title, error: 'Title is required' },
+				title: {
+					...data.title,
+					error:
+						data.title.value.length <= 250
+							? 'Title is required'
+							: 'Title should be less than 250 characters',
+				},
 			});
 			return;
 		}
-		if (!data.body.value) {
+		if (!data.body.value || data.body.value.length > 5000) {
 			setData({
 				...data,
-				body: { ...data.body, error: 'Body is required' },
+				body: {
+					...data.body,
+					error:
+						data.body.value.length <= 5000
+							? 'Body is required'
+							: 'Body should be less than 5000 characters',
+				},
 			});
 			return;
 		}
@@ -71,6 +86,10 @@ export const usePostForm = () => {
 				body: data.body.value,
 				images: imagesToSend,
 			});
+			if (Array.isArray(post)) {
+				setErrors(post);
+				return;
+			}
 			if (post.id) {
 				setData({
 					title: {
@@ -110,5 +129,6 @@ export const usePostForm = () => {
 		uploading,
 		data,
 		files,
+		errors,
 	};
 };

@@ -14,13 +14,13 @@ type Props = {
 const PostContent = ({ noShowPost = false, post }: Props) => {
 	return (
 		<div className='text-gray-700'>
-			<p
-				className={`text-justify px-1 text-sm md:text-base ${
+			<pre
+				className={`text-justify px-1 text-sm md:text-base font-sans ${
 					!noShowPost && 'truncate-3'
 				}`}
 			>
 				{post.body}
-			</p>
+			</pre>
 			<div>
 				<Carousel>
 					{post.images

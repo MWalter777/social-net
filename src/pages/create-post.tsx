@@ -18,6 +18,7 @@ const CreatePost = () => {
 		onSubmit,
 		removeFile,
 		uploading,
+		errors,
 	} = usePostForm();
 	return (
 		<Layout>
@@ -43,8 +44,19 @@ const CreatePost = () => {
 						<span className='w-full text-red-700 text-xs px-4'>
 							{data.title.error}
 						</span>
+						{errors
+							.filter((e) => e.field === 'title')
+							.map((e, i) => (
+								<span key={i} className='w-full text-red-700 text-xs px-4'>
+									{e.message}
+								</span>
+							))}
 					</div>
 					<div className='px-4 w-full'>
+						<div className='flex justify-between'>
+							<span className='font-normal'>Body content</span>
+							<span className='font-bold'>{data.body.value.length}/5000</span>
+						</div>
 						<TextareaAutosize
 							className='w-full h-32 p-2 border border-primary rounded-lg outline-none text-gray-700 text-sm'
 							minRows={3}
@@ -57,6 +69,13 @@ const CreatePost = () => {
 						<span className='w-full text-red-700 text-xs'>
 							{data.body.error}
 						</span>
+						{errors
+							.filter((e) => e.field === 'body')
+							.map((e, i) => (
+								<span key={i} className='w-full text-red-700 text-xs px-4'>
+									{e.message}
+								</span>
+							))}
 					</div>
 					<div className='max-w-[508px] w-full justify-center items-center px-4 overflow-hidden drag-and-drop-files'>
 						<FileUploader

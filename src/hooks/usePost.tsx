@@ -20,6 +20,20 @@ const usePost = <T, R>(url = '') => {
 			},
 			body: JSON.stringify(body),
 		});
+		if (!res.ok) {
+			const {
+				errors,
+			}: { errors: { defaultMessage: string; field: string }[] } =
+				await res.json();
+			if (errors && Array.isArray(errors) && errors.length > 0) {
+				const result = errors.map((e) => ({
+					message: e.defaultMessage,
+					field: e.field,
+				}));
+				return result;
+			}
+			return [{ message: 'Something went wrong', field: '' }];
+		}
 		const { data }: { data: R } = await res.json();
 		return data;
 	};
