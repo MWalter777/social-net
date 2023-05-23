@@ -32,11 +32,8 @@ export const authOptions: AuthOptions = {
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-	const addCookie = (data: IResponseValidation) => {
-		res.setHeader(
-			'Set-Cookie',
-			`accessToken=${data.accessToken}; myId=${data.user.id};  Path=/;`
-		);
+	const addCookie = async (data: string, name: string) => {
+		await res.setHeader('Set-Cookie', `${name}=${data};  Path=/;`);
 	};
 	const signInCallback = async ({
 		user,
@@ -56,9 +53,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 					token: account.access_token || '',
 				});
 				if (data.accessToken) {
-					Object.assign(user, { accessToken: data.accessToken });
-					console.log('adding cookie');
-					addCookie(data);
+					await addCookie(data.accessToken, 'accessToken');
 					return true;
 				}
 			} catch (err) {

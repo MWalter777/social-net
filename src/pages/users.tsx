@@ -5,8 +5,11 @@ import { IUser } from '@/interface/IUser';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import Spinner from '@/components/Spinner';
 import UserHeader from '@/components/posts/UserHeader';
+import { GetServerSidePropsContext } from 'next';
+import useGetMe from '@/hooks/useGetMe';
 
 const Users = () => {
+	const { user } = useGetMe();
 	const {
 		data: users,
 		hasNext,
@@ -29,19 +32,21 @@ const Users = () => {
 	return (
 		<Layout>
 			<div className='w-full flex flex-col gap-2 items-center justify-center'>
-				{users.map((user) => (
-					<div
-						key={user.id}
-						className='w-full md:w-10/12 lg:w-8/12 bg-white text-primary flex flex-col p-2 md:p-4 lg:p-8 gap-2 rounded-sm shadow-lg'
-					>
-						<UserHeader
-							{...user}
-							avatar={user.avatar}
-							postId='1'
-							noShowPost={true}
-						/>
-					</div>
-				))}
+				{users
+					.filter((u) => u.id.toString() !== user?.id.toString())
+					.map((user) => (
+						<div
+							key={user.id}
+							className='w-full md:w-10/12 lg:w-8/12 bg-white text-primary flex flex-col p-2 md:p-4 lg:p-8 gap-2 rounded-sm shadow-lg'
+						>
+							<UserHeader
+								{...user}
+								avatar={user.avatar}
+								postId='1'
+								noShowPost={true}
+							/>
+						</div>
+					))}
 				{hasNext && (
 					<div className='w-full flex justify-center' ref={sentryRef}>
 						<Spinner />
@@ -50,6 +55,15 @@ const Users = () => {
 			</div>
 		</Layout>
 	);
+};
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+	const myId = ctx.req.cookies.myId || '';
+	return {
+		props: {
+			myId,
+		},
+	};
 };
 
 export default Users;

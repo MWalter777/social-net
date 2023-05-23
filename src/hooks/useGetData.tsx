@@ -2,7 +2,7 @@ import { BASE_BACKEND_URL } from '@/constant/urls';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-const useGetData = <T, B>(url = '') => {
+const useGetData = <T,>(url = '') => {
 	const [accessToken, setAccessToken] = useState('');
 
 	useEffect(() => {
@@ -24,7 +24,7 @@ const useGetData = <T, B>(url = '') => {
 		return data;
 	};
 
-	return { getData };
+	return { getData, accessToken };
 };
 
 export default useGetData;

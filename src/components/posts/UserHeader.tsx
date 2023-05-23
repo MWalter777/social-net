@@ -1,3 +1,5 @@
+import useGetMe from '@/hooks/useGetMe';
+import usePost from '@/hooks/usePost';
 import {
 	Avatar,
 	IconButton,
@@ -6,9 +8,9 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material';
-import Cookies from 'js-cookie';
 import Link from 'next/link';
-import React, { MouseEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import {
@@ -46,6 +48,9 @@ const UserHeader = ({
 	className = '',
 }: Props) => {
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+	const { postFn } = usePost('api/messages/create');
+	const router = useRouter();
+	const { user } = useGetMe();
 
 	const settings: Setting[] = [
 		{
@@ -58,9 +63,15 @@ const UserHeader = ({
 			id: 20,
 			name: 'Add user',
 			Icon: MdAddBox,
-			onClick: () => {
-				const myId = Cookies.get('myId');
-				console.log({ myId, id });
+			onClick: async () => {
+				const body = {
+					senderId: user?.id,
+					recipeId: id,
+				};
+				const res: any = await postFn(body);
+				if (res.id) {
+					router.push('/messages');
+				}
 			},
 		},
 		{
