@@ -7,7 +7,7 @@ import MessageForm from '@/components/messages/MessageForm';
 import { useGetMe } from '@/hooks/useGetMe';
 import Spinner from '@/components/Spinner';
 
-const messages = () => {
+const Messages = () => {
 	const { user } = useGetMe();
 
 	return (
@@ -30,4 +30,4 @@ const messages = () => {
 	);
 };
 
-export default messages;
+export default Messages;
