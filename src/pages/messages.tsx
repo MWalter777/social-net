@@ -8,6 +8,7 @@ import { GetServerSidePropsContext } from 'next';
 import useGetListData from '@/hooks/useGetListData';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import useGetMe from '@/hooks/useGetMe';
+import { IRootMessage } from '@/interface/IRootMessage';
 
 const messages = () => {
 	const { user } = useGetMe();
@@ -16,7 +17,7 @@ const messages = () => {
 		hasNext,
 		onLoadMore,
 		data: users,
-	} = useGetListData(`api/messages/${user?.id}`);
+	} = useGetListData<IRootMessage>(`api/messages/${user?.id}`);
 	const [sentryRef] = useInfiniteScroll({
 		loading,
 		hasNextPage: hasNext,
@@ -29,6 +30,7 @@ const messages = () => {
 		// visible, instead of becoming fully visible on the screen.
 		rootMargin: '0px 0px 400px 0px',
 	});
+	console.log({ users });
 	return (
 		<Layout>
 			<div className='flex flex-row h-screen antialiased text-gray-800'>

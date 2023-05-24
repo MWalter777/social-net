@@ -1,5 +1,10 @@
 import React from 'react';
 import UserItem from './UserItem';
+import { IRootMessage } from '@/interface/IRootMessage';
+
+type Props = {
+	listMessages: IRootMessage[];
+};
 
 const MessageSideBar = () => {
 	return (
