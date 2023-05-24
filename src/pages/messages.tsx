@@ -4,7 +4,7 @@ import MessageSideBar from '@/components/messages/MessageSideBar';
 import MessageHeader from '@/components/messages/MessageHeader';
 import MessageContent from '@/components/messages/MessageContent';
 import MessageForm from '@/components/messages/MessageForm';
-import { useGetMe } from '@/hooks/useGetMe';
+import useGetMe from '@/hooks/useGetMe';
 import Spinner from '@/components/Spinner';
 
 const Messages = () => {

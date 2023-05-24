@@ -1,4 +1,4 @@
-import { useGetMe } from '@/hooks/useGetMe';
+import useGetMe from '@/hooks/useGetMe';
 import usePost from '@/hooks/usePost';
 import {
 	Avatar,
