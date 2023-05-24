@@ -1,8 +1,10 @@
+import { IRootMessage } from '@/interface/IRootMessage';
 import React from 'react';
 
 type Props = {
 	active?: boolean;
 	newMessages?: number;
+	message: IRootMessage;
 };
 
 const getStyle = (active: boolean) => {
@@ -11,7 +13,7 @@ const getStyle = (active: boolean) => {
 	return 'relative flex flex-row items-center p-4';
 };
 
-const UserItem = ({ active = false, newMessages = 0 }: Props) => {
+const UserItem = ({ active = false, newMessages = 0, message }: Props) => {
 	return (
 		<div className={getStyle(active)}>
 			<div className='absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3'>
@@ -21,11 +23,8 @@ const UserItem = ({ active = false, newMessages = 0 }: Props) => {
 				T
 			</div>
 			<div className='flex flex-col flex-grow ml-3'>
-				<div className='text-sm font-medium'>Cuberto</div>
-				<div className='text-xs truncate w-40'>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis,
-					doloribus?
-				</div>
+				<div className='text-sm font-medium'>{message?.sender?.name}</div>
+				<div className='text-xs truncate w-40'>{message.lastMessage}</div>
 			</div>
 			{newMessages > 0 && (
 				<div className='flex-shrink-0 ml-2 self-end mb-1'>
