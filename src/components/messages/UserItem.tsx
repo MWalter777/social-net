@@ -5,6 +5,7 @@ type Props = {
 	active?: boolean;
 	newMessages?: number;
 	message: IRootMessage;
+	id: number;
 };
 
 const getStyle = (active: boolean) => {
@@ -13,7 +14,8 @@ const getStyle = (active: boolean) => {
 	return 'relative flex flex-row items-center p-4';
 };
 
-const UserItem = ({ active = false, newMessages = 0, message }: Props) => {
+const UserItem = ({ active = false, newMessages = 0, message, id }: Props) => {
+	console.log(message.sender, id);
 	return (
 		<div className={getStyle(active)}>
 			<div className='absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3'>
@@ -23,7 +25,11 @@ const UserItem = ({ active = false, newMessages = 0, message }: Props) => {
 				T
 			</div>
 			<div className='flex flex-col flex-grow ml-3'>
-				<div className='text-sm font-medium'>{message?.sender?.name}</div>
+				<div className='text-sm font-medium'>
+					{message.sender.id.toString() === id?.toString()
+						? message?.recipient?.name
+						: message?.sender?.name}
+				</div>
 				<div className='text-xs truncate w-40'>{message.lastMessage}</div>
 			</div>
 			{newMessages > 0 && (

@@ -34,10 +34,10 @@ const MessageSideBar = ({ id }: Props) => {
 						</div>
 					</div>
 				</div>
-				<div className='mt-2 border border-red-600 overflow-y-auto myScroll overflow-x-hidden'>
+				<div className='mt-2 border overflow-y-auto myScroll overflow-x-hidden'>
 					<div className='flex flex-col -mx-4 pr-1'>
 						{users.map((user, index) => (
-							<UserItem key={index} message={user} />
+							<UserItem key={index} message={user} id={id} />
 						))}
 						{hasNext && (
 							<div className='w-full flex justify-center' ref={sentryRef}>
