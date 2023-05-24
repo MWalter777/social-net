@@ -1,4 +1,4 @@
-import useGetMe from '@/hooks/useGetMe';
+import { useGetMe } from '@/hooks/useGetMe';
 import usePost from '@/hooks/usePost';
 import {
 	Avatar,
@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import {

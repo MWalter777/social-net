@@ -2,7 +2,7 @@ import { IUser } from '@/interface/IUser';
 import { useEffect, useState } from 'react';
 import useGetData from './useGetData';
 
-const useGetMe = () => {
+export const useGetMe = () => {
 	const [user, setUser] = useState<IUser>();
 	const { getData, accessToken } = useGetData<IUser>('api/users/me');
 
@@ -22,5 +22,3 @@ const useGetMe = () => {
 	}, [accessToken]);
 	return { user, accessToken };
 };
-
-export default useGetMe;
